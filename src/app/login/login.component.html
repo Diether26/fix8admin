@@ -1,0 +1,26 @@
+<mat-card class="mat-card-login">
+  <mat-card-title class="logo-card-title"><img src="../../assets/images/logo.png" style="width:100px; padding: 5%" class="md-card-image" alt="~/Frontend/images/question-circular-button.svg"></mat-card-title>
+  <!-- <mat-card-title class="signin-card-title">Sign In</mat-card-title> -->
+    <mat-card-content>
+      <form novalidate (submit)="submitLogin($event)">
+        <app-loading-spinner *ngIf="loading">Loading...</app-loading-spinner>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Username</mat-label>
+            <input [(ngModel)]="loginData.Username" type="text" matInput name="username" (change)="usernameChange($event)">
+            <span class="error" *ngIf="usernameisnotValid">Please input username.</span>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Password</mat-label>
+            <input matInput [(ngModel)]="loginData.Password" name="password" [type]="hide ? 'password' : 'text'" (change)="passwordChange($event)">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <span class="error" *ngIf="passwordisnotValid" >Please input password.</span>
+          </mat-form-field>
+        <div class="button">
+          <button mat-raised-button color="primary" class="btn-login">Login</button>
+        </div>
+      </form>
+    </mat-card-content>
+</mat-card> 

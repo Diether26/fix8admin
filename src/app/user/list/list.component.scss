@@ -1,0 +1,28 @@
+/* Structure */
+table {
+    width: 100%;
+    white-space: nowrap;
+  }
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+.user-container{
+  padding: 0 4% 0 3%;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+.example-sidenav {
+  padding: 20px;
+}
+.userlist-sidenav-content{
+  padding:20px;
+}
+tr.example-element-row:not(.example-element-row):hover {
+  background: whitesmoke;
+}
+tr.example-element-row:not(.example-element-row):active {
+  background: #efefef;
+}

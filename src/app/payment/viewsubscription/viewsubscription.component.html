@@ -1,0 +1,24 @@
+<mat-icon mat-dialog-close class="closeButton">highlight_off</mat-icon>
+
+<div mat-dialog-content>
+    <h3 style="text-align:center;">Subscription Detail</h3>
+    <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title-group style="padding:12px 0px">
+            <mat-card-title style="font-size:16px"><b>Subscriber Name</b></mat-card-title>
+            <mat-card-subtitle style="padding:14px; color:black;">{{ subscribe_detail.SubscriberName }}</mat-card-subtitle>
+            <mat-card-title style="font-size:16px"><b>Payment Method</b></mat-card-title>
+            <mat-card-subtitle style="padding:14px; color:black;">{{ subscribe_detail.PaymentMethod }}</mat-card-subtitle>
+            <mat-card-title style="font-size:16px"><b>Contact Number</b></mat-card-title>
+            <mat-card-subtitle style="padding:14px; color:black;">{{ subscribe_detail.ContactNumber }}</mat-card-subtitle>
+            <mat-card-title style="font-size:16px"><b>Email</b></mat-card-title>
+            <mat-card-subtitle style="padding:14px; color:black;">{{ subscribe_detail.Email }}</mat-card-subtitle>
+            <mat-card-title style="font-size:16px"><b>User Type</b></mat-card-title>
+            <mat-card-subtitle style="padding:14px; color:black;">{{ subscribe_detail.Usertype }}</mat-card-subtitle>
+            <mat-card-title style="font-size:16px"><b>Subscribe Date</b></mat-card-title>
+            <mat-card-subtitle style="padding:14px; color:black;">{{ subscribe_detail.SubscribeDate | date: 'mediumDate' }}</mat-card-subtitle>
+            <img mat-card-xl-image src="{{ Paymentreceipt }}" />
+          </mat-card-title-group>
+        </mat-card-header>
+      </mat-card>
+</div>

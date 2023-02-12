@@ -1,0 +1,22 @@
+<mat-icon mat-dialog-close class="closeButton">highlight_off</mat-icon>
+<h3 style="text-align:center;">Update Contract File</h3>
+    <mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-title-group style="margin: 0px 37px 0px 0px;">
+            <!-- <img mat-card-xl-image src="{{ contractFile }}" /> -->
+            </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-footer style="text-align:center; padding:14px 0px">
+            <div class="upload-btn-wrapper">
+                <button class="btn">Select File</button>
+                <input type="file" (change)="selectFile($event)" >
+            </div><br>
+            <span style="color:green">{{ tanginamo }}</span>
+            <span style="color:red">{{ msg }}</span>
+        </mat-card-footer>
+
+        <div mat-dialog-actions class="dialogAction">  
+            <button mat-stroked-button mat-dialog-close color="primary">Close</button>
+            <button mat-flat-button color="primary" (click)="updateContractFile()">Submit</button>
+        </div>
+    </mat-card>

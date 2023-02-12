@@ -1,0 +1,66 @@
+<mat-icon mat-dialog-close class="closeButton">highlight_off</mat-icon>
+
+<div mat-dialog-content>
+    <h3 style="text-align:center;">Invoice Details</h3>
+    <table style="width:100%; border:1px solid black">
+        <thead>
+            <tr>
+                <th style="border-right: 1px solid black">Service Fee</th>
+                <th style="border-right: 1px solid black">Total Cost</th>
+                <th style="border-right: 1px solid black">Payment Method</th>
+                <th style="border-right: 1px solid black">Create Date</th>
+                <th>Due Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="text-align:center">
+                <td style="border-right: 1px solid black; color:black;">{{ formatToPhp(invoice_details.ServiceFee) }}</td>
+                <td style="border-right: 1px solid black; color:black;">{{ formatToPhp(invoice_details.TotalCost) }}</td>
+                <td style="border-right: 1px solid black; color:black;">{{ invoice_details.PaymentMethod }}</td>
+                <td style="border-right: 1px solid black; color:black;">{{ invoice_details.CreateDate | date: 'mediumDate' }}</td>
+                <td style="color:black;">{{ invoice_details.DueDate | date: 'mediumDate' }}</td>
+            </tr>
+        </tbody>
+    </table><br>
+    <h3 style="text-align:center;">Invoice Item</h3>
+    <table style="width:100%; border: 1px solid black;">
+        <thead>
+            <tr>
+                <th style="border-right: 1px solid black">Name</th>
+                <th style="border-right: 1px solid black">Quantity</th>
+                <th style="border-right: 1px solid black">Unit</th>
+                <th style="border-right: 1px solid black">Type</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="text-align:center">
+                <td style="border-right: 1px solid black; color:black;">{{ invoice_item.Name }}</td>
+                <td style="border-right: 1px solid black; color:black;">{{ invoice_item.Quantity }}</td>
+                <td style="border-right: 1px solid black; color:black;">{{ invoice_item.Unit }}</td>
+                <td style="border-right: 1px solid black; color:black;">{{ invoice_item.Type }}</td>
+                <td style="color:black;">{{ formatToPhp(invoice_item.Price) }}</td>
+            </tr>
+        </tbody>
+    </table><br>
+    <h3 style="text-align:center;">Invoice Request Detail</h3>
+    <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title-group style="padding:12px 0px">
+            <mat-card-title style="font-size:16px"><b>Payment Method</b></mat-card-title>
+            <mat-card-subtitle style="padding:14px; color:black;">{{ invoice_req_detail.PaymentMethod }}</mat-card-subtitle>
+            <mat-card-title style="font-size:16px"><b>Service Name</b></mat-card-title>
+            <mat-card-subtitle style="padding:14px; color:black;">{{ invoice_req_detail.ServiceName }}</mat-card-subtitle>
+            <mat-card-title style="font-size:16px"><b>Job Type</b></mat-card-title>
+            <mat-card-subtitle style="padding:14px; color:black;">{{ invoice_req_detail.JobType }}</mat-card-subtitle>
+            <mat-card-title style="font-size:16px"><b>Contact Number</b></mat-card-title>
+            <mat-card-subtitle style="padding:14px; color:black;">{{ invoice_req_detail.ContactNumber }}</mat-card-subtitle>
+            <mat-card-title style="font-size:16px"><b>Requested To</b></mat-card-title>
+            <mat-card-subtitle style="padding:14px; color:black;">{{ invoice_req_detail.Requested_To }}</mat-card-subtitle>
+            <mat-card-title style="font-size:16px"><b>Requested By</b></mat-card-title>
+            <mat-card-subtitle style="padding:14px; color:black;">{{  invoice_req_detail.Requested_By }}</mat-card-subtitle>
+            <img mat-card-xl-image src="{{ Paymentreceipt }}" />
+          </mat-card-title-group>
+        </mat-card-header>
+      </mat-card>
+</div>

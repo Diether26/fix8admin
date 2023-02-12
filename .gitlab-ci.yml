@@ -1,0 +1,38 @@
+# The Docker image that will be used to build your app
+image: node:lts
+
+stages:
+  - build
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+
+build-pages:
+  stage: build
+  script: 
+  #  - rm -r -fo build
+  #  - CI=false npm install
+  #  - CI=false npm run prod:build
+   - npm install -g @angular/cli
+   - npm install
+   - npm run build:prod
+   - mkdir -p public
+   - cp dist/fix8-admin/index.html dist/fix8-admin/404.html
+   - mv dist/fix8-admin/* public/
+  artifacts:
+    paths:
+      - public
+
+pages:
+  stage: deploy
+  script:
+    - ls # just something
+  artifacts:
+    paths:
+      - public
+  only:
+    variables:
+      - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+

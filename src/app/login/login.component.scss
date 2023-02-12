@@ -1,0 +1,37 @@
+  mat-card-login{
+    position: fixed;
+  }
+  mat-card-title{
+   font-size:26px;
+   font-weight: bold;
+  }
+
+  :host {
+    display: flex;
+    justify-content: center;
+    padding-top:250px;
+  }
+
+  .error {
+    color: red;
+    font-size: 10px;
+  }
+
+  .button {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .mat-mdc-card{
+    width: 25%;
+  }
+
+  .logo-card-title{
+    text-align: center;
+  }
+
+  .btn-login{
+    width: 100px;
+    height: 40px;
+  }
+  .width-100{width: 100%;}

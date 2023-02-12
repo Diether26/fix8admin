@@ -1,0 +1,28 @@
+mat-sidenav-container {
+    height: 100%;
+    width:100%;
+    position: fixed;
+  }
+mat-sidenav{
+    width: 200px;
+    background-color: white;
+  }
+mat-toolbar{
+    background:#badbf3;
+}
+mat-list{
+  padding: 0px;
+}
+.active{
+  background: #e6e6e6;
+}
+.spacer {
+  flex: 1 1 auto;
+}
+mat-list-item:hover{
+  background-color: #e6e6e6;
+  cursor: pointer;
+}
+mat-expansion-panel-body{
+  padding:0 0px ;
+}

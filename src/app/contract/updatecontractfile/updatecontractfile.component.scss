@@ -1,0 +1,40 @@
+mat-card-subtitle{
+    font-size: 15px;
+    text-indent: 14px;
+    padding: 14px;
+}
+.closeButton{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 8px 3px;
+    line-height: 14px;
+    min-width: auto;
+    color:red;
+    cursor: pointer;
+}
+
+
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    cursor:pointer;
+}
+
+.upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+.btn {
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+}

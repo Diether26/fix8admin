@@ -1,0 +1,96 @@
+<div class="example-header" fxLayout="row" style="padding:15px;">
+    <h4>List of Feedback</h4>
+    <mat-form-field style="width:40%;">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search..." #input>
+    </mat-form-field>
+</div>
+<div style="padding:15px; width: 100%;" class="table-responsive example-container mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matTableResponsive matSort>
+      <!-- ID Column -->
+      <ng-container matColumnDef="Id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+        <td mat-cell *matCellDef="let feedback">{{feedback.Id}}</td>
+      </ng-container>
+
+      <!-- Rate Column-->
+      <ng-container matColumnDef="Rate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Rate</th>
+        <td mat-cell *matCellDef="let feedback">
+            <div *ngIf="feedback.Rate == 1">
+                <span *ngFor="let a of oneStarRate; let index = index">
+                    <mat-icon style="color:#f9f949">star</mat-icon>
+                </span>
+            </div>
+            <div *ngIf="feedback.Rate == 2">
+                <span *ngFor="let a of twoStarRate; let index = index">
+                    <mat-icon style="color:#f9f949">star</mat-icon>
+                </span>
+            </div>
+            <div *ngIf="feedback.Rate == 3">
+                <span *ngFor="let a of threeStarRate; let index = index">
+                    <mat-icon style="color:#f9f949">star</mat-icon>
+                </span>
+            </div>
+            <div *ngIf="feedback.Rate == 4">
+                <span *ngFor="let a of fourStarRate; let index = index">
+                    <mat-icon style="color:#f9f949">star</mat-icon>
+                </span>
+            </div>
+            <div *ngIf="feedback.Rate == 5">
+                <span *ngFor="let a of fiveStarRate; let index = index">
+                    <mat-icon style="color:#f9f949">star</mat-icon>
+                </span>
+            </div>
+        </td>
+      </ng-container>
+
+      <!-- AppointmentDate Column -->
+      <ng-container matColumnDef="RateDesc">
+        <th mat-header-cell *matHeaderCellDef> Rate Description </th>
+        <td mat-cell *matCellDef="let feedback"> {{feedback.RateDesc }} </td>
+      </ng-container>
+        
+      <!-- Comment Column -->
+      <ng-container matColumnDef="Comment">
+        <th mat-header-cell *matHeaderCellDef> Comment</th>
+        <td mat-cell *matCellDef="let feedback"> {{feedback.Comment}} </td>
+      </ng-container>
+
+      <!-- Date Column -->
+      <ng-container matColumnDef="Date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let feedback"> {{feedback.Date | date: 'mediumDate' }} </td>
+      </ng-container>
+    
+      <!-- FeedBack To Column -->
+      <ng-container matColumnDef="FeedbackTo">
+        <th mat-header-cell *matHeaderCellDef> Feedback To </th>
+        <td mat-cell *matCellDef="let feedback"> {{feedback.FeedbackTo }} </td>
+      </ng-container>
+
+      <!-- FeedBack By Column -->
+      <ng-container matColumnDef="FeedbackBy">
+        <th mat-header-cell *matHeaderCellDef> Feedback By </th>
+        <td mat-cell *matCellDef="let feedback"> {{ feedback.FeedbackBy }} </td>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef style="text-align:center;">Action</th>
+        <td mat-cell *matCellDef="let feedback; " style="text-align:center;">
+            <button mat-mini-fab color="primary" (click)="deleteFeedback(feedback.Id)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </td>
+      </ng-container>
+            
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page"></mat-paginator>
+</div>

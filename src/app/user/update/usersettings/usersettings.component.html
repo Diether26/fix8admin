@@ -1,0 +1,70 @@
+<h1 mat-dialog-title>User Settings</h1>
+<div mat-dialog-content>
+    <form novalidate (submit)="submitUpdateUser($event)"> 
+        <app-loading-spinner *ngIf="loading">Loading...</app-loading-spinner>
+        <mat-form-field appearance="fill" class="width-32 ml-1">
+            <mat-label>Firstname</mat-label>
+            <input [(ngModel)]="user_settings.Firstname" [ngModelOptions]="{standalone: true}" (change)="firstnameOnChange($event)" id="firstname" matInput >
+            <span class="error" *ngIf="firstnameIsNotValid" >Firstname must contain letters with space only!</span>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="width-32 ml-1">
+            <mat-label>Middlename</mat-label>
+            <input [(ngModel)]="user_settings.Middlename" [ngModelOptions]="{standalone: true}" (change)="middlenameOnChange($event)" id="middlename" matInput>
+            <span class="error" *ngIf="middlenameIsNotValid" >Middlename must contain letters with space only!</span>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="width-32 ml-1">
+            <mat-label>Lastname</mat-label>
+            <input [(ngModel)]="user_settings.Lastname" [ngModelOptions]="{standalone: true}" (change)="lastnameOnChange($event)" id="lastname" matInput>
+            <span class="error" *ngIf="lastnameIsNotValid" >Lastname must contain letters with space only!</span>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="width-49 ml-1">
+            <mat-label>Email</mat-label>
+            <input [(ngModel)]="user_settings.Email" [ngModelOptions]="{standalone: true}" (change)="emailOnChange($event)"  id="emaili" matInput>
+            <span class="error" *ngIf="emailIsNotValid" >Email is not valid.</span>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="width-49 ml-1">
+            <mat-label>Contact Number</mat-label>
+            <input [(ngModel)]="user_settings.Contactnumber" [ngModelOptions]="{standalone: true}" (change)="contactNumberOnChange" (keypress)="numberOnly($event)"  id="contactnumber" matInput>
+            <span class="error" *ngIf="contactNumberIsNotValid" >Contact Number must contain numbers only!</span>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="width-49 ml-1">
+            <mat-label>Birthdate</mat-label>
+            <input [(ngModel)]="user_settings.Birthdate" [ngModelOptions]="{standalone: true}"  [matDatepicker]="picker" (change)="bdateOnChange($event)" id="dateOfBirth" matInput >
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <span class="error" *ngIf="birthdateIsNotValid" >Must be a valid date.</span>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="width-49 ml-1">
+            <mat-label>Sex</mat-label>
+            <select [(ngModel)]="user_settings.Sex" [ngModelOptions]="{standalone: true}" (change)="sexOnChange($event)" id="sex" matNativeControl >
+                <option value="">Select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+            <span class="error" *ngIf="sexIsNotValid" >Field is required.</span>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Address</mat-label>
+            <input [(ngModel)]="user_settings.Address" [ngModelOptions]="{standalone: true}" (change)="addressOnChange($event)" id="address" matInput>
+            <span class="error" *ngIf="addressIsNotValid" >Max length 500 characters</span>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="width-49 ml-1">
+            <mat-label>Username</mat-label>
+            <input [(ngModel)]="user_settings.Username" [ngModelOptions]="{standalone: true}" matInput name="username" (change)="usernameOnChange($event)">
+            <span class="error" *ngIf="usernameIsNotValid">Please input username.</span>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="width-49 ml-1">
+            <mat-label>Password</mat-label>
+            <input matInput [(ngModel)]="user_settings.Password" [ngModelOptions]="{standalone: true}" name="password" [type]="hide ? 'password' : 'text'" (change)="passwordOnChange($event)">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <span class="error" *ngIf="passwordIsNotValid" >Please input password.</span>
+        </mat-form-field>
+        <div mat-dialog-actions class="dialogAction">
+            <button mat-stroked-button mat-dialog-close color="primary">Close</button>
+            <button mat-flat-button color="primary" >Submit</button>
+        </div>
+    </form>
+</div>
+

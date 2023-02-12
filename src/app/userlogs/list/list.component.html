@@ -1,0 +1,45 @@
+<div class="" fxLayout="row" style="padding:15px;">
+    <h4>List of User Logs</h4>
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search..." #input>
+    </mat-form-field>
+</div>
+
+<div style="padding:15px;" class="example-container">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <!-- ID Column -->
+      <ng-container matColumnDef="Id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+        <td mat-cell *matCellDef="let userLogs"> {{userLogs.Id}} </td>
+      </ng-container>
+
+      <!-- Full Name Column -->
+       <ng-container matColumnDef="FullName">
+        <th mat-header-cell *matHeaderCellDef> Full Name </th>
+        <td mat-cell *matCellDef="let userLogs"> {{userLogs.FullName}} </td>
+      </ng-container>
+
+      <!-- Action Column-->
+      <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+        <td mat-cell *matCellDef="let userLogs">{{ userLogs.Action }}</td>
+      </ng-container>
+
+      <!-- Date Log Column -->
+      <ng-container matColumnDef="DateLog">
+        <th mat-header-cell *matHeaderCellDef> Date Log </th>
+        <td mat-cell *matCellDef="let userLogs"> {{userLogs.DateLog | date: 'mediumDate' }} </td>
+      </ng-container>
+
+     
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page"></mat-paginator>
+</div>

@@ -1,0 +1,75 @@
+<div class="example-header" fxLayout="row" style="padding:15px;">
+    <h4>List of Payments</h4>
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search..." #input>
+    </mat-form-field>
+</div>
+
+<div style="padding:15px;" class="table-responsive example-container mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matTableResponsive matSort>
+      <!-- ID Column -->
+      <ng-container matColumnDef="Id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+        <td mat-cell *matCellDef="let payment"> 
+          {{payment.Id}} 
+        </td>
+      </ng-container>
+      
+      <!-- Payment For Column-->
+      <ng-container matColumnDef="PaymentFor">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Payment For</th>
+        <td mat-cell *matCellDef="let payment " >{{ payment.subscribe_id == 0 || payment.subscribe_id == null ? "INVOICE" : "SUBSCRIPTION"}}</td>
+      </ng-container>
+
+      <!-- Payment Method Column-->
+      <ng-container matColumnDef="PaymentMethod">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Payment Method</th>
+        <td mat-cell *matCellDef="let payment">{{ payment.PaymentMethod }}</td>
+      </ng-container>
+
+      <!-- Amount Column -->
+      <ng-container matColumnDef="Amount">
+        <th mat-header-cell *matHeaderCellDef> Amount </th>
+        <td mat-cell *matCellDef="let payment"> {{payment.Amount}} </td>
+      </ng-container>
+
+      <!-- Reference Number Column -->
+      <ng-container matColumnDef="ReferenceNumber">
+        <th mat-header-cell *matHeaderCellDef> Reference Number</th>
+        <td mat-cell *matCellDef="let payment"> {{payment.ReferenceNumber}} </td>
+      </ng-container>
+
+       <!-- Payment Date Column -->
+      <ng-container matColumnDef="DateCreated">
+        <th mat-header-cell *matHeaderCellDef> Date Created </th>
+        <td mat-cell *matCellDef="let payment">{{ payment.DateCreated | date: 'mediumDate'  }}</td>
+      </ng-container>
+
+       <!-- Status Column -->
+      <ng-container matColumnDef="Status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let payment"> {{ payment.Status }} </td>
+      </ng-container>
+      
+      <!-- Action Column -->
+      <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef style="text-align:center;">Action</th>
+        <td mat-cell *matCellDef="let payment; " style="text-align:center;">
+            <button mat-mini-fab color="primary" *ngIf="payment.invoice_id > 0" (click)="openDialogViewInvoice(payment.invoice_id)">
+                <mat-icon>receipt</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" *ngIf="payment.subscribe_id > 0" (click)="openDialogViewSubscription(payment.subscribe_id)">
+              <mat-icon>receipt</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page"></mat-paginator>
+</div>

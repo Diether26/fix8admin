@@ -1,0 +1,51 @@
+<div class="example-header" fxLayout="row" style="padding:15px;">
+    <h4>List of Subscription</h4>
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search..." #input>
+    </mat-form-field>
+</div>
+
+<div style="padding:15px;" class="table-responsive example-container mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matTableResponsive matSort>
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+        <td mat-cell *matCellDef="let user"> 
+          {{user.id}} 
+        </td>
+      </ng-container>
+      
+      <!-- Subscription Name Column-->
+      <ng-container matColumnDef="SubscriptionName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Subscription Name</th>
+        <td mat-cell *matCellDef="let user">{{ user.SubscriptionName }}</td>
+      </ng-container>
+
+      <!-- Subscribe Date Column -->
+      <ng-container matColumnDef="SubscribeDate">
+        <th mat-header-cell *matHeaderCellDef> Subscribe Date </th>
+        <td mat-cell *matCellDef="let user"> {{user.SubscribeDate | date: 'mediumDate' }} </td>
+      </ng-container>
+      
+      <!-- Action Column -->
+      <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef style="text-align:center;">Action</th>
+        <td mat-cell *matCellDef="let user; " style="text-align:center;">
+          <button mat-raised-button color="primary" *ngIf="user.Status == 'For Verification'" (click)="openDialogViewPayment(user.id)" style="margin:10px;">
+              View Payment
+            </button>
+            <mat-icon *ngIf="user.Status == 'Verified'" style="color:green">check_circle_outline</mat-icon>
+            <mat-icon *ngIf="user.Status == 'Rejected' || user.Status == 'Void'" style="color:red">highlight_off</mat-icon>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page"></mat-paginator>
+</div>

@@ -1,0 +1,79 @@
+<div class="example-header" fxLayout="row" style="padding:15px;">
+    <h4>List of Contract</h4>
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search..." #input>
+    </mat-form-field>
+</div>
+
+<div style="padding:15px;" class="table-responsive example-container mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matTableResponsive matSort>
+      <!-- ID Column -->
+      <ng-container matColumnDef="Id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+        <td mat-cell *matCellDef="let contract"> 
+          {{contract.Id}} 
+        </td>
+      </ng-container>
+      
+      <!-- Contract File Column-->
+      <ng-container matColumnDef="ContractFile">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Contract File</th>
+        <td mat-cell *matCellDef="let contract"><a href="{{ contract_url }}{{ contract.ContractFile }}" target="_blank">Download</a></td>
+      </ng-container>
+
+      <!-- Service Name Column -->
+      <ng-container matColumnDef="ServiceName">
+        <th mat-header-cell *matHeaderCellDef> Service Name </th>
+        <td mat-cell *matCellDef="let contract"> {{contract.ServiceName}} </td>
+      </ng-container>
+      
+      <!-- Job Type Column -->
+      <ng-container matColumnDef="JobType">
+        <th mat-header-cell *matHeaderCellDef> Job Type </th>
+        <td mat-cell *matCellDef="let contract"> {{contract.JobType}} </td>
+      </ng-container>
+
+       <!-- Contact Number Column -->
+      <ng-container matColumnDef="ContactNumber">
+        <th mat-header-cell *matHeaderCellDef> Contact Number </th>
+        <td mat-cell *matCellDef="let contract">{{ contract.ContactNumber }}</td>
+      </ng-container>
+
+       <!-- Requested By Column -->
+      <ng-container matColumnDef="RequestedBy">
+        <th mat-header-cell *matHeaderCellDef> Requested By </th>
+        <td mat-cell *matCellDef="let contract">{{ contract.RequestedBy }}</td>
+      </ng-container>
+
+      <!-- Date Requested Column -->
+      <ng-container matColumnDef="DateRequested">
+        <th mat-header-cell *matHeaderCellDef> Date Requested </th>
+        <td mat-cell *matCellDef="let contract">{{ contract.DateRequested | date : 'mediumDate' }}</td>
+      </ng-container>
+    
+       <!-- Status Column -->
+      <ng-container matColumnDef="Status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let contract"> {{ contract.Status }} </td>
+      </ng-container>
+      
+      <!-- Action Column -->
+      <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef style="text-align:center;">Action</th>
+        <td mat-cell *matCellDef="let contract; " style="text-align:center;">
+            <button mat-mini-fab color="primary" (click)="openDialogUpdateContractFile(contract.Id)">
+                <mat-icon>upload</mat-icon>
+            </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page"></mat-paginator>
+</div>

@@ -1,0 +1,26 @@
+<mat-icon mat-dialog-close class="closeButton">highlight_off</mat-icon>
+
+<div mat-dialog-content>
+    <h3 style="text-align:center;">Payment Detail</h3>
+    <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title-group style="padding:12px 0px">
+            <mat-card-title style="font-size:16px"><b>Payment Method</b></mat-card-title>
+            <mat-card-subtitle style="padding:14px; color:black;">{{ payment_info.PaymentMethod }}</mat-card-subtitle>
+            <mat-card-title style="font-size:16px"><b>Amount</b></mat-card-title>
+            <mat-card-subtitle style="padding:14px; color:black;">{{ formatToPhp(payment_info.Amount) }}</mat-card-subtitle>
+            <mat-card-title style="font-size:16px"><b>Reference Number</b></mat-card-title>
+            <mat-card-subtitle style="padding:14px; color:black;">{{ payment_info.ReferenceNumber }}</mat-card-subtitle>
+            <mat-card-title style="font-size:16px"><b>Date Created</b></mat-card-title>
+            <mat-card-subtitle style="padding:14px; color:black;">{{ payment_info.DateCreated | date: 'mediumDate' }}</mat-card-subtitle>
+            <mat-card-title style="font-size:16px"><b>Status</b></mat-card-title>
+            <mat-card-subtitle style="padding:14px; color:black; font-weight: bold;">{{ payment_info.StatusDesc }}</mat-card-subtitle>
+            <img mat-card-xl-image src="{{ Paymentreceipt }}" />
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-footer style="padding:10px;" *ngIf="payment_info.StatusDesc == 'For Verification'">
+            <button mat-raised-button style="color:green; width: 50%;" (click)="approveSubscription(payment_info.SubscriptionID)"><mat-icon>thumb_up</mat-icon> Approve</button>
+            <button mat-raised-button style="color:red; width: 50%" (click)="rejectSubscription(payment_info.SubscriptionID)"><mat-icon>thumb_down</mat-icon> Reject</button>
+        </mat-card-footer><br><br>
+      </mat-card>
+</div>

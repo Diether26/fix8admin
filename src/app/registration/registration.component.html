@@ -1,0 +1,87 @@
+<mat-card class="mat-card-registration">
+    <mat-card-title class="logo-card-title"><img src="../../assets/images/logo.png" style="width:180px" class="md-card-image" alt="~/Frontend/images/question-circular-button.svg"></mat-card-title>
+    <div class="show-profile"><img class="img-profile" [src]="url" *ngIf="url">
+      <div class="errorMessage" [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+    </div>
+    <mat-card-title class="signup-card-title">Sign Up</mat-card-title>
+      <form novalidate (submit)="submitRegForm($event)">
+        <app-loading-spinner *ngIf="loading">Loading...</app-loading-spinner>
+        <div class="example-container">
+          <mat-form-field appearance="fill" class="width-32">
+            <mat-label>First Name</mat-label>
+            <input matInput id="firstname" (change)="fnChange($event)" name="firstname">
+            <span class="error" *ngIf="firstNameisnotValid" >Must contain letters with spaces only!</span>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="width-32 ml-1">
+            <mat-label>Middle Name</mat-label>
+            <input matInput id="middlename" (change)="mnChange($event)" name="middlename">
+            <span class="error" *ngIf="middleNameisnotValid" >Must contain letters with spaces only!</span>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="width-32 ml-1">
+            <mat-label>Last Name</mat-label>
+            <input matInput id="lastname" (change)="lnChange($event)" name="lastname">
+            <span class="error" *ngIf="lastNameisnotValid" >Must contain letters with spaces only!</span>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Email address</mat-label>
+            <input matInput id="emailAddress" name="emailAddress" (change)="emailChange($event)" placeholder="Ex. test@example.com">
+            <span class="error" *ngIf="emailisnotValid" >Must be a valid email address.</span>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Home address</mat-label>
+            <input matInput id="homeAddress" name="homeAddress" (change)="addressChange($event)">
+            <span class="error" *ngIf="addressisnotValid" >Max length 500 characters</span>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Contact Number</mat-label>
+            <input matInput type="number" id="contactNumber" name="contactNumber" (keypress)="numberOnly($event)" (change)="contactChange($event)">
+            <span class="error" *ngIf="contactisnotValid" >Must contain numbers only.</span>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Sex</mat-label>
+            <select matNativeControl id="sex" name="sex" (change)="sexChange($event)">
+              <option value="">Select</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            <span class="error" *ngIf="sexisnotValid" >Field is required.</span>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Birth Date</mat-label>
+            <input matInput [matDatepicker]="picker" id="dateOfBirth "name="dateOfBirth" (change)="bdateChange($event)">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <span class="error" *ngIf="bdateisnotValid" >Must be a valid date.</span>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Username</mat-label>
+            <input type="text" matInput id="username" name="username" (change)="usernameChange($event)">
+            <span class="error" *ngIf="usernameisnotValid" >Username Must have minimum of 6 Characters and maximum of 12 characters!</span>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Enter password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" id="password" name="password" (change)="passwordChange($event)">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <span class="error" *ngIf="isSpecialvalid" >Password must contain at least 1 special characters.</span>
+            <span class="error" *ngIf="passwordisnotValid" > Password Must have minimum of 6 Characters and maximum of 12 characters!</span>
+          </mat-form-field>
+          <br>
+          <div class="upload-btn-wrapper">
+                <button class="btn">Upload Profile</button>
+                <input type="file" (change)="selectFile($event)" >
+          </div>
+          <div class="button">
+            <button mat-raised-button color="primary" class="btn-register">Submit</button>
+          </div>
+        </div>
+      </form>
+<mat-card>

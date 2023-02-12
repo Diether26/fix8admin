@@ -1,0 +1,120 @@
+<div class="" fxLayout="row" style="padding:15px;">
+    <h4>List of Users</h4>
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Firstname, Lastname." #input>
+    </mat-form-field>
+</div>
+
+<div style="padding:15px;" class="example-container">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+        <td mat-cell *matCellDef="let user"> {{user.id}} </td>
+      </ng-container>
+
+      <!-- User Type Column-->
+      <ng-container matColumnDef="usertype">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>User Type</th>
+        <td mat-cell *matCellDef="let user">{{ user.usertype }}</td>
+      </ng-container>
+      <!-- FirstName Column -->
+      <ng-container matColumnDef="firstname">
+        <th mat-header-cell *matHeaderCellDef> First Name </th>
+        <td mat-cell *matCellDef="let user"> {{user.firstname}} </td>
+      </ng-container>
+
+      <!-- Middlename Column -->
+      <ng-container matColumnDef="middlename">
+        <th mat-header-cell *matHeaderCellDef> Middle Name </th>
+        <td mat-cell *matCellDef="let user"> {{user.middlename}} </td>
+      </ng-container>
+
+      <!-- Lastname Column -->
+      <ng-container matColumnDef="lastname">
+        <th mat-header-cell *matHeaderCellDef> Last Name </th>
+        <td mat-cell *matCellDef="let user"> {{user.lastname}} </td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let user"> {{user.email}} </td>
+      </ng-container>
+
+       <!-- ContactNumber Column -->
+      <ng-container matColumnDef="contactnumber">
+        <th mat-header-cell *matHeaderCellDef> Contact Number </th>
+        <td mat-cell *matCellDef="let user"> {{user.contactnumber}} </td>
+      </ng-container>
+       
+      <!-- Birthdate Column -->
+      <ng-container matColumnDef="birthdate">
+        <th mat-header-cell *matHeaderCellDef> Birth Date </th>
+        <td mat-cell *matCellDef="let user"> {{user.birthdate | date: 'mediumDate' }} </td>
+      </ng-container>
+      
+      <!-- Address Column -->
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef> Address </th>
+        <td mat-cell *matCellDef="let user"> {{user.address}} </td>
+      </ng-container>
+
+      <!-- Sex Column -->
+      <ng-container matColumnDef="sex">
+        <th mat-header-cell *matHeaderCellDef> Sex </th>
+        <td mat-cell *matCellDef="let user"> {{user.sex}} </td>
+      </ng-container>
+
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let user"> {{ user.status }} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let user; ">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item  (click)="openDialogUserSettings(user.id)">
+              <mat-icon>autorenew</mat-icon>
+              <span>Update</span>
+            </button>
+            <button mat-menu-item *ngIf="user.status == 'Inactive'" (click)="activateUser(user.id)">
+              <mat-icon>lock_open</mat-icon>
+              <span>Activate</span>
+            </button>
+            <button mat-menu-item *ngIf="user.status == 'Active'" (click)="deactivateUser(user.id)">
+              <mat-icon>lock</mat-icon>
+              <span>Deactivate</span>
+            </button>
+            <button mat-menu-item *ngIf="user.status == 'Active'" (click)="banUser(user.id)">
+              <mat-icon>lock</mat-icon>
+              <span>Ban</span>
+            </button>
+            <button mat-menu-item *ngIf="user.status == 'Ban'" (click)="unBanUser(user.id)">
+              <mat-icon>lock_open</mat-icon>
+              <span>Unban</span>
+            </button>
+            <button mat-menu-item *ngIf="user.status == 'Inactive' || user.status == 'Ban'" (click)="deleteUser(user.id)" >
+              <mat-icon>delete</mat-icon>
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page"></mat-paginator>
+</div>
